@@ -85,14 +85,35 @@ Dokumen ini berisi urutan eksekusi dan template prompt persis untuk diberikan ke
 
 ---
 
-### STEP 9: Expansion Sub-Places & Pet Hunting (Fase 2)
+### STEP 9: QA & Self-Test Fase 1 (Fase 1.10)
+- **File wajib di-attach/mention**: `01_RULE_AGENT_OPERATIONAL.md` (§4), `03_ROADMAP_EXECUTION_CHECKLIST.md`.
+- **Template Prompt**:
+  > "Jalankan seluruh Self-Test Checklist Fase 1, playtest UI mobile low-end, dan siapkan rangkuman review item parody brand sebelum lanjut ke Fase 2."
+
+---
+
+### STEP 10: Expansion Sub-Places & Pet Hunting (Fase 2.1 - 2.2)
 - **File wajib di-attach/mention**: `01_RULE_AGENT_OPERATIONAL.md`, `09_MAP_DESIGN_PROMPTS.md` (§3 - §6), `07_DATA_ITEM_CATALOG.md` (§6), `11_ART_STYLE_BIBLE.md` (§4 - §5).
 - **Template Prompt**:
   > "Tambahkan Sub-Place 2 (Borobudur/Prambanan) dan Sub-Place 5 (Bromo/Rinjani). Buat `PetSystem.lua` minigame umpan & lasso dengan odds disclosure UI wajib. Sebelum rilis aset Garuda Emas/Papua, minta review sensitivitas budaya manusia."
 
 ---
 
-### STEP 10: Telemetry & CI/CD Automated Publish (Fase 3 & Ops)
+### STEP 11: Dual Leaderboard System (Fase 2.3)
+- **File wajib di-attach/mention**: `01_RULE_AGENT_OPERATIONAL.md`, `05_ARCH_SYSTEM_AND_DATASTORE.md`, `02_PRD_PRODUCT_REQUIREMENTS.md`.
+- **Template Prompt**:
+  > "Implementasikan `LeaderboardSystem.lua` server-side dengan dua mode: All-Time (OrderedDataStore) dan Weekly Reset (setiap Senin 00:00 WIB). Berikan reward otomatis untuk Rank 1 mingguan."
+
+---
+
+### STEP 12: QA & Review Budaya Fase 2 (Fase 2.4)
+- **File wajib di-attach/mention**: `01_RULE_AGENT_OPERATIONAL.md`, `11_ART_STYLE_BIBLE.md`.
+- **Template Prompt**:
+  > "Jalankan Self-Test Checklist Fase 2 dan minta konfirmasi manusia untuk desain final Garuda Emas serta aset simbolik budaya."
+
+---
+
+### STEP 13: Telemetry & CI/CD Automated Publish (Fase 3 & Ops)
 - **File wajib di-attach/mention**: `13_OPS_CI_CD_PIPELINE.md`, `14_OPS_LIVEOPS_AND_LAUNCH.md`, `15_OPS_COMMUNITY_MARKETING.md`.
 - **Template Prompt**:
   > "Setup workflow GitHub Actions sesuai `13_OPS_CI_CD_PIPELINE.md` (Selene lint, Rojo build, TestEZ runner). Pasang event telemetry `AnalyticsService` sesuai taxonomy di `14_OPS_LIVEOPS_AND_LAUNCH.md`."

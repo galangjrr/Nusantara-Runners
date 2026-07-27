@@ -11,16 +11,29 @@ function MainHub.Build()
 	-- Baseplate
 	local baseplate = Instance.new("Part")
 	baseplate.Name = "Baseplate"
-	baseplate.Size = Vector3.new(200, 10, 200)
+	baseplate.Size = Vector3.new(800, 10, 800)
 	baseplate.Position = Vector3.new(0, -5, 0)
 	baseplate.Anchored = true
 	baseplate.BrickColor = BrickColor.new("Dark stone grey")
+	baseplate.Material = Enum.Material.Concrete
 	baseplate.Parent = mapFolder
+
+	-- Stadium Oval (Siluet GBK)
+	local stadium = Instance.new("Part")
+	stadium.Name = "StadiumOval"
+	stadium.Shape = Enum.PartType.Cylinder
+	stadium.Size = Vector3.new(60, 300, 220)
+	stadium.Position = Vector3.new(0, 30, -150)
+	stadium.Orientation = Vector3.new(0, 0, 90)
+	stadium.Anchored = true
+	stadium.BrickColor = BrickColor.new("Institutional white")
+	stadium.Material = Enum.Material.Concrete
+	stadium.Parent = mapFolder
 
 	-- SpawnLocation
 	local spawnLoc = Instance.new("SpawnLocation")
 	spawnLoc.Name = "SpawnLocation"
-	spawnLoc.Size = Vector3.new(12, 1, 12)
+	spawnLoc.Size = Vector3.new(24, 1, 24)
 	spawnLoc.Position = Vector3.new(0, 0.5, 0)
 	spawnLoc.Anchored = true
 	spawnLoc.BrickColor = BrickColor.new("Bright yellow")
@@ -60,17 +73,25 @@ function MainHub.Build()
 		end)
 	end
 	
+	local function fixAnchoring(model)
+		for _, part in ipairs(model:GetDescendants()) do
+			if part:IsA("BasePart") then
+				part.Anchored = true
+			end
+		end
+	end
 	
 	-- Gym Area (Treadmills)
-	for i = 1, 3 do
+	for i = 1, 10 do
 		local treadmill
 		if mapAssets and mapAssets:FindFirstChild("Treadmill") then
 			treadmill = mapAssets.Treadmill:Clone()
-			treadmill:PivotTo(CFrame.new(-20 + (i * 10), 0, 20))
+			fixAnchoring(treadmill)
+			treadmill:PivotTo(CFrame.new(-60 + (i * 12), 0, 40) * CFrame.Angles(0, math.rad(180), 0))
 		else
 			treadmill = Instance.new("Part")
 			treadmill.Size = Vector3.new(4, 2, 8)
-			treadmill.Position = Vector3.new(-20 + (i * 10), 1, 20)
+			treadmill.Position = Vector3.new(-60 + (i * 12), 1, 40)
 			treadmill.BrickColor = BrickColor.new("Really black")
 		end
 		treadmill.Name = "Treadmill_" .. i
@@ -83,18 +104,25 @@ function MainHub.Build()
 	if mapAssets then
 		local treeRef = mapAssets:FindFirstChild("Tree")
 		if treeRef then
-			for i = 1, 5 do
+			for i = 1, 30 do
 				local t = treeRef:Clone()
-				t:PivotTo(CFrame.new(-40 + (i*15), 0, -30))
+				fixAnchoring(t)
+				-- Randomize positions around the plaza
+				local rx = math.random(-300, 300)
+				local rz = math.random(-50, 300)
+				t:PivotTo(CFrame.new(rx, 0, rz) * CFrame.Angles(0, math.random(0, 360), 0))
 				t.Parent = mapFolder
 			end
 		end
 		
 		local benchRef = mapAssets:FindFirstChild("Bench")
 		if benchRef then
-			for i = 1, 3 do
+			for i = 1, 15 do
 				local b = benchRef:Clone()
-				b:PivotTo(CFrame.new(20, 0, -20 + (i*10)))
+				fixAnchoring(b)
+				local rx = math.random(-250, 250)
+				local rz = math.random(10, 100)
+				b:PivotTo(CFrame.new(rx, 0, rz) * CFrame.Angles(0, math.rad(math.random(0, 360)), 0))
 				b.Parent = mapFolder
 			end
 		end
@@ -103,8 +131,8 @@ function MainHub.Build()
 	-- Shop Area
 	local shopVendor = Instance.new("Part")
 	shopVendor.Name = "ShopVendorBooth"
-	shopVendor.Size = Vector3.new(10, 5, 10)
-	shopVendor.Position = Vector3.new(30, 2.5, 0)
+	shopVendor.Size = Vector3.new(20, 15, 20)
+	shopVendor.Position = Vector3.new(100, 7.5, 0)
 	shopVendor.Anchored = true
 	shopVendor.BrickColor = BrickColor.new("Bright blue")
 	shopVendor.Parent = mapFolder
@@ -113,8 +141,8 @@ function MainHub.Build()
 	-- Gacha Area
 	local gachaBooth = Instance.new("Part")
 	gachaBooth.Name = "GachaBooth"
-	gachaBooth.Size = Vector3.new(8, 6, 8)
-	gachaBooth.Position = Vector3.new(30, 3, -20)
+	gachaBooth.Size = Vector3.new(16, 12, 16)
+	gachaBooth.Position = Vector3.new(150, 6, -40)
 	gachaBooth.Anchored = true
 	gachaBooth.BrickColor = BrickColor.new("Bright red")
 	gachaBooth.Parent = mapFolder
@@ -122,13 +150,13 @@ function MainHub.Build()
 	-- Travel Terminal
 	local travelTerminal = Instance.new("Part")
 	travelTerminal.Name = "TravelTerminal"
-	travelTerminal.Size = Vector3.new(6, 8, 6)
-	travelTerminal.Position = Vector3.new(0, 4, -40)
+	travelTerminal.Size = Vector3.new(20, 25, 20)
+	travelTerminal.Position = Vector3.new(-150, 12.5, 0)
 	travelTerminal.Anchored = true
 	travelTerminal.BrickColor = BrickColor.new("Neon orange")
 	travelTerminal.Parent = mapFolder
 	
-	print("[MapBuilder] MainHub GBK Senayan generated with 3D Assets.")
+	print("[MapBuilder] MainHub GBK Senayan generated with massive 3D Assets.")
 end
 
 return MainHub

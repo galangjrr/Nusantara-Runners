@@ -14,6 +14,17 @@ local ShopFrame = require(script.UI.ShopFrame)
 ShopFrame.Init()
 local PetCatchFrame = require(script.UI.PetCatchFrame)
 PetCatchFrame.Init()
+local OnboardingOverlay = require(script.UI.OnboardingOverlay)
+OnboardingOverlay.Create()
+local LeaderboardBoard = require(script.UI.LeaderboardBoard)
+LeaderboardBoard.Init()
+
+local RemoteContracts = require(game:GetService("ReplicatedStorage").Shared.RemoteContracts)
+local UIStateController = require(script.Controllers.UIStateController)
+local tutorialEvent = RemoteContracts.GetTutorialEvent()
+tutorialEvent.OnClientEvent:Connect(function()
+	UIStateController.SetState("Onboarding")
+end)
 
 local CollectionService = game:GetService("CollectionService")
 for _, zone in ipairs(CollectionService:GetTagged("PetSpawnZone")) do

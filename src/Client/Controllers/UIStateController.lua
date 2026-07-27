@@ -1,7 +1,7 @@
 --!strict
 local UIStateController = {}
 
-export type MenuState = "None" | "Shop" | "Coach" | "Stravi" | "RaceHUD"
+export type MenuState = "None" | "Shop" | "Coach" | "Stravi" | "RaceHUD" | "Onboarding"
 UIStateController.CurrentState = "None" :: MenuState
 
 UIStateController.Callbacks = {}

@@ -34,7 +34,8 @@ export type PlayerProfile = {
 	},
 	Meta: {
 		CreatedAt: number,
-		LastLoginAt: number
+		LastLoginAt: number,
+		HasCompletedTutorial: boolean
 	}
 }
 

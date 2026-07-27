@@ -37,7 +37,8 @@ local ProfileTemplate = {
 	},
 	Meta = {
 		CreatedAt = 0,
-		LastLoginAt = 0
+		LastLoginAt = 0,
+		HasCompletedTutorial = false
 	}
 }
 

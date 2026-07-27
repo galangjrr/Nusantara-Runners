@@ -8,15 +8,23 @@ function MainHub.Build()
 	mapFolder.Name = "MainHub"
 	mapFolder.Parent = workspace
 
-	-- Baseplate
-	local baseplate = Instance.new("Part")
-	baseplate.Name = "Baseplate"
-	baseplate.Size = Vector3.new(800, 10, 800)
-	baseplate.Position = Vector3.new(0, -5, 0)
-	baseplate.Anchored = true
-	baseplate.BrickColor = BrickColor.new("Dark stone grey")
-	baseplate.Material = Enum.Material.Concrete
-	baseplate.Parent = mapFolder
+	-- Terrain Generation
+	local Terrain = workspace.Terrain
+	Terrain:Clear() -- Clear old terrain if any
+	
+	-- Massive Grass Field
+	Terrain:FillBlock(
+		CFrame.new(0, -5, 0),
+		Vector3.new(1000, 10, 1000),
+		Enum.Material.Grass
+	)
+	
+	-- Concrete Plaza at Center
+	Terrain:FillBlock(
+		CFrame.new(0, -4, 0),
+		Vector3.new(200, 12, 200),
+		Enum.Material.Concrete
+	)
 
 	-- Stadium Oval (Siluet GBK)
 	local stadium = Instance.new("Part")

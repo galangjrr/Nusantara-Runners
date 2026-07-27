@@ -1,0 +1,48 @@
+name: build-and-check
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Selene
+        uses: NTBBloodbath/selene-action@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Lint
+        run: selene src/
+
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rojo
+        uses: rojo-rbx/setup-rojo@v1
+      - name: Build Place File
+        run: |
+          mkdir -p build
+          rojo build default.project.json -o build/place.rbxlx
+
+  publish-staging:
+    if: github.ref == 'refs/heads/staging'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish via Open Cloud API
+        env:
+          ROBLOX_API_KEY: ${{ secrets.ROBLOX_STAGING_API_KEY }}
+          UNIVERSE_ID: ${{ secrets.UNIVERSE_ID }}
+          PLACE_ID: ${{ secrets.STAGING_PLACE_ID }}
+        run: |
+          echo "Publishing to universe $UNIVERSE_ID place $PLACE_ID"
+          # curl -X POST -H "x-api-key: $ROBLOX_API_KEY" \
+          #   -H "Content-Type: application/xml" \
+          #   --data-binary @build/place.rbxlx \
+          #   "https://apis.roblox.com/universes/v1/$UNIVERSE_ID/places/$PLACE_ID/versions?versionType=Published"
